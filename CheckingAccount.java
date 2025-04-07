@@ -54,16 +54,83 @@ class CheckingAccount implements HasMenu{
 			} //End exit condition
 			else if (menuResponse.equals("1")){
 				System.out.println("Account Report");
+				this.getAccountReport();
 			} //Account Report
 			else if (menuResponse.equals("2")){
 				System.out.println("Make Deposit");
+				this.makeDeposit();
 			} //Deposit
 			else if (menuResponse.equals("3")){
 				System.out.println("Make Withdrawal");
+				this.makeWithdrawal();
 			} //Withdrawal
 			else {
 				System.out.println("Please enter a valid input.");
 			} //User is confused
 		} //End while loop
 	} //End start()
+
+	public double getBalance(){
+		return balance;
+	} //End balance getter
+	
+	public void setBalance(double balance){
+		this.balance = balance;
+	} //End balance setter
+
+	public int getAccountID(){
+		return accountID;
+	} //End accountID getter 
+	
+	public void setAccountID(int accountID){
+		this.accountID = accountID;
+	} //End accountID setter
+
+	public String getBalanceString(){
+		return String.format("$%.2f", balance);
+	} //End formatted balance
+
+	public void checkBalance(){
+		String sBalance = getBalanceString();
+		System.out.println("Current Balance: " + sBalance);
+	} //End checkBalance
+
+	public void getAccountReport(){
+		System.out.println("Account ID: " + this.getAccountID());
+		this.checkBalance();
+	} //End getAccountReport()
+	
+	public double getDouble(){
+		java.util.Scanner doubleInput = new java.util.Scanner(System.in);
+		String sResult = doubleInput.nextLine();
+		double result;
+		try {
+			result = Double.parseDouble(sResult);
+		} catch(Exception e){
+			System.out.println("Not a legal input. Changing to 0.");
+			result = 0d;
+		} 
+		return result;
+	} //End getDouble()
+	
+	public void makeDeposit(){
+		System.out.print("Deposit Amount: ");
+		double deposit = this.getDouble();
+		this.balance += deposit;
+		System.out.println("New Balance: " + this.getBalanceString());
+	} //End makeDeposit()
+
+	public void makeWithdrawal(){
+		System.out.println("Withdrawal Amount: ");
+		double withdrawal = this.getDouble();
+		if(withdrawal >= this.getBalance()){
+			System.out.println("Insufficient Funds");
+		} 
+		else {
+			this.balance -= withdrawal; 
+			System.out.println("New Balance: " + this.getBalanceString());
+		} 
+	} //End makeWithdrawal()
+
 } //End class def
+
