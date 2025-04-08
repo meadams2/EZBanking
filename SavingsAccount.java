@@ -6,13 +6,14 @@ class SavingsAccount extends CheckingAccount{
 	private double interestRate;
 
 	public static void main(String[] args){
-		SavingsAccount account = new SavingsAccount(100, 5, 240001);
+		SavingsAccount account = new SavingsAccount(1000, 5);
 		account.start();
 	} //End main test harness
 
-	public SavingsAccount(double balance, double interestRate, int accountID){
-		super(balance, accountID);
+	public SavingsAccount(double balance, double interestRate){
+		super(balance);
 		this.interestRate = interestRate;
+		this.accountID = this.makeAccountID();
 	} //End constructor
 
 	@Override

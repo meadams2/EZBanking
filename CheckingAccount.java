@@ -6,7 +6,7 @@ class CheckingAccount implements HasMenu{
 	private double balance;
 //	private Random rnd = new Random();
 //	Initially considered doing account numbers with Randomization...that has issues
-	private int accountID;
+	int accountID;
 
 	public static void main(String[] args){
 		CheckingAccount c = new CheckingAccount();
@@ -22,9 +22,9 @@ class CheckingAccount implements HasMenu{
 	//	this.accountID = 1000 + rnd.nextInt(9000);
 	} //End CheckingAccount()
 
-	public CheckingAccount(double balance, int accountID){
+	public CheckingAccount(double balance){
 		this.balance = balance;
-		this.accountID = accountID;
+		this.accountID = this.makeAccountID();
 	} //End CheckingAccount(balance, accountID)
 	
 	public int makeAccountID(){
