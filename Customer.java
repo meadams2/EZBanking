@@ -5,8 +5,8 @@ import java.util.*;
 class Customer extends User {
 	class CheckingAcctList extends ArrayList<CheckingAccount>{};
 	class SavingsAcctList extends ArrayList<SavingsAccount>{};
-//	protected CheckingAcctList chAccounts = new CheckingAcctList();
-//	protected SavingsAcctList svAccounts = new SavingsAcctList();
+	protected CheckingAcctList chAccounts = new CheckingAcctList();
+	protected SavingsAcctList svAccounts = new SavingsAcctList();
 
 	protected String userName;
 	protected String PIN;
@@ -20,16 +20,16 @@ class Customer extends User {
 		super("", "");
 		this.userName = "";
 		this.PIN = "";
-	//	this.chAccounts = this.loadSampleChAccount();
-	//	this.svAccounts = this.loadSampleSvAccount();
+		this.loadSampleChAccount();
+		this.loadSampleSvAccount();
 	} //End constructor
 
 	public Customer(String userName, String sPIN){
 		super(userName, sPIN);
 		this.userName = userName;
 		this.PIN = sPIN;
-		//this.chAccounts = this.loadSampleChAccount();
-		//this.svAccounts = this.loadSampleSvAccount();
+		this.loadSampleChAccount();
+		this.loadSampleSvAccount();
 	} //End dual parameter constructor
 
 	@Override
@@ -60,6 +60,7 @@ class Customer extends User {
 				
 				else if(menuInput.equals("1")){
 					System.out.println("View All Account Balances");
+					this.getReport();
 				} //View All Account
 				
 				else if(menuInput.equals("2")){
@@ -82,8 +83,40 @@ class Customer extends User {
 	} //End start()	
 
 	@Override
-	public String getReport(){
-		return "Username: " + userName + "Accounts: ";
+	public void getReport(){
+		System.out.println("Checking Accounts: ");
+		this.printChAccounts();
+		System.out.println("");
+
+		System.out.println("Savings Accounts: ");
+		this.printSvAccounts();	
 	}
+
+	public void loadSampleChAccount(){
+		chAccounts.add(new CheckingAccount(1000d));
+		chAccounts.add(new CheckingAccount(1000d));
+	} //loadSampleChAccount()
+
+	public void loadSampleSvAccount(){
+		svAccounts.add(new SavingsAccount(1000d, 5));
+		svAccounts.add(new SavingsAccount(1000d, 5));
+	} //loadSampleSvAccount()
+
+	public void printChAccounts(){
+		Iterator<CheckingAccount> it = chAccounts.iterator();
+		while(it.hasNext()){
+			CheckingAccount currentAccount = it.next();
+			currentAccount.getAccountReport();
+		} //End while
+	} //printChAccounts()
+
+	public void printSvAccounts(){
+		Iterator<SavingsAccount> it = svAccounts.iterator();
+		while(it.hasNext()){
+			SavingsAccount currentAccount = it.next();
+			currentAccount.getAccountReport();
+		} //End while
+	} //printSvAccounts()
+
 
 } //End class def

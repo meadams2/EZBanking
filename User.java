@@ -106,5 +106,5 @@ public abstract class User implements HasMenu{
 		return PIN;
 	} //PIN getter
 
-	public abstract String getReport();
+	public abstract void getReport();
 } //End class def
