@@ -27,7 +27,7 @@ public abstract class User implements HasMenu{
 		System.out.print("PIN: ");
 		sPIN = loginInput.nextLine();
 
-		if (sUsername.equalsIgnoreCase(this.userName){
+		if (sUsername.equalsIgnoreCase(this.userName)){
 			if (sPIN.matches("^\\d{4}$")){
 				if (sPIN.equals(this.PIN)){
 					login = true;
@@ -98,7 +98,7 @@ public abstract class User implements HasMenu{
 			this.PIN = sPIN;
 		} 
 		else {
-			SYstem.out.println("PIN must be numeric with 4 digits. Changing PIN to 0000");
+			System.out.println("PIN must be numeric with 4 digits. Changing PIN to 0000");
 		} 
 	} //PIN setter
 
