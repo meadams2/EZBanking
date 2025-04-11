@@ -65,6 +65,7 @@ class Customer extends User {
 				
 				else if(menuInput.equals("2")){
 					System.out.println("Access Checking");
+					this.accessChAccounts();
 				} //Access Checking
 
 				else if(menuInput.equals("3")){
@@ -117,6 +118,41 @@ class Customer extends User {
 			currentAccount.getAccountReport();
 		} //End while
 	} //printSvAccounts()
+	
+	public void accessChAccounts(){
+		this.printChAccounts();
+
+		java.util.Scanner checkingInput = new java.util.Scanner(System.in);
+		CheckingAccount currentAccount = null;
+		
+		System.out.print("Account Number: ");
+		String sAccount = checkingInput.nextLine();
+		int accountID;	
+		try {
+			accountID = Integer.parseInt(sAccount);
+		} catch (NumberFormatException e){
+			e.printStackTrace();
+			//Lets program die gracefully if user inputs a nonnumeric
+		} 
+
+		Iterator<CheckingAccount> it = chAccounts.iterator();
+		CheckingAccount iterChecking;
+		boolean keepGoing = true;
+		while (keepGoing){
+			while(it.hasNext()){
+				iterChecking = it.next();
+				if (accountID.equals(iterChecking.getAccountID())){
+					currentAccount = iterChecking;
+					currentAccount.start();
+					keepGoing = false;
+				} //Account found
+			} //End iterator
+			if (currentAccount == null){
+				System.out.println("Account not found.");
+				keepGoing = false;
+			} //Account not found
+		} //End while loop
+	} ///End accessChecking()
 
 
 } //End class def
