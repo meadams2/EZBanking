@@ -127,7 +127,7 @@ class Customer extends User {
 		
 		System.out.print("Account Number: ");
 		String sAccount = checkingInput.nextLine();
-		int accountID;	
+		int accountID = 0;	
 		try {
 			accountID = Integer.parseInt(sAccount);
 		} catch (NumberFormatException e){
@@ -141,7 +141,7 @@ class Customer extends User {
 		while (keepGoing){
 			while(it.hasNext()){
 				iterChecking = it.next();
-				if (accountID.equals(iterChecking.getAccountID())){
+				if (accountID == iterChecking.getAccountID()){
 					currentAccount = iterChecking;
 					currentAccount.start();
 					keepGoing = false;
