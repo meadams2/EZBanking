@@ -70,6 +70,7 @@ class Customer extends User {
 
 				else if(menuInput.equals("3")){
 					System.out.println("Access Savings");
+					this.accessSvAccounts();
 				} //Access Savings
 				else {
 					System.out.println("Invalid input.");
@@ -153,6 +154,43 @@ class Customer extends User {
 			} //Account not found
 		} //End while loop
 	} ///End accessChecking()
+
+	public void accessSvAccounts(){
+		this.printSvAccounts();
+
+		java.util.Scanner savingInput = new java.util.Scanner(System.in);
+		SavingsAccount currentAccount = null;
+
+		System.out.print("Account Number: ");
+		String sAccount = savingInput.nextLine();
+		int accountID = 0;
+
+		try {
+			accountID = Integer.parseInt(sAccount);
+		} catch (NumberFormatException e){
+			e.printStackTrace();
+		} //End exception handling 
+
+		Iterator<SavingsAccount> it = svAccounts.iterator();
+		SavingsAccount iterSavings;
+		boolean keepGoing = true;
+
+		while(keepGoing){
+			while(it.hasNext()){
+				iterSavings = it.next();
+				if(accountID == iterSavings.getAccountID()){
+					currentAccount = iterSavings;
+					currentAccount.start();
+					keepGoing = false;
+				} //Account found
+			} //End iterator
+
+			if(currentAccount == null){
+				System.out.println("Account not found.");
+				keepGoing = false;
+			} //Account not found
+		} //End while loop
+	} //End accessSavings()
 
 
 } //End class def
