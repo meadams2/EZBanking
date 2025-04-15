@@ -56,12 +56,12 @@ class Bank implements HasMenu{
 			
 			else if (menuInput.equals("1")){
 				System.out.println("Logging in as admin.");
-				//loginAsAdmin();
+				this.loginAsAdmin();
 			} //Admin login
 
 			else if (menuInput.equals("2")){
 				System.out.println("Logging in as customer.");
-				//loginAsCustomer();
+				this.loginAsCustomer();
 			} //Customer login
 
 			else{
@@ -70,6 +70,98 @@ class Bank implements HasMenu{
 		} //End while
 	} //End start()
 
+	public void loginAsAdmin(){
+		java.util.Scanner adminInput = new java.util.Scanner(System.in);
+		Admin currentAdmin = null;
+
+		System.out.print("Username: ");
+		String sUserName = adminInput.nextLine();
+		
+		System.out.print("PIN: ");
+		String sPIN = adminInput.nextLine();
+
+		Iterator<Admin> it = admins.iterator();
+		Admin iterAdmin;
+		boolean keepGoing = true;
+
+		while(keepGoing){
+			while(it.hasNext()){
+				iterAdmin = it.next();
+				if(iterAdmin.login(sUserName, sPIN)){
+					currentAdmin = iterAdmin;
+					this.adminStart(currentAdmin);
+					keepGoing = false;
+				} //User found
+			} //End iterator
+
+			if(currentAdmin == null){
+				System.out.println("User not found.");
+				keepGoing = false;
+			} //User not found
+		} //End while loop
+	} //End loginAsAdmin()
+
+	public void adminStart(Admin admin){
+		boolean keepGoing = true;
+		while(keepGoing){
+			String menuResponse = admin.menu();
+			if (menuResponse.equals("0")){
+				System.out.println("Exiting to Bank Menu.");
+				keepGoing = false;
+			} //Exit
+
+			else if(menuResponse.equals("1")){
+				System.out.println("Viewing All Customer Reports");
+			} //Full Customer Report
+
+			else if(menuResponse.equals("2")){
+				System.out.println("Access Customer.");
+			} //Access Customer
+
+			else if(menuResponse.equals("3")){
+				System.out.println("Add Customer.");
+			} //Add customer
+
+			else if(menuResponse.equals("4")){
+				System.out.println("Delete Cusotmer.");
+			} //Delete customer
+
+			else {
+				System.out.println("Invalid input.");
+			} //Invalid
+		} //End while loop
+	} //End adminStart()
+
+	public void loginAsCustomer(){
+		java.util.Scanner customerInput = new java.util.Scanner(System.in);
+		Customer currentCustomer = null;
+
+		System.out.print("Username: ");
+		String sUsername = customerInput.nextLine();
+
+		System.out.print("PIN: ");
+		String sPIN = customerInput.nextLine();
+
+		Iterator<Customer> it = customers.iterator();
+		Customer iterCustomer;
+		boolean keepGoing = true;
+		while(keepGoing){
+			while(it.hasNext()){
+				iterCustomer = it.next();
+				if(iterCustomer.login(sUsername, sPIN)){
+					currentCustomer = iterCustomer;
+					currentCustomer.start();
+					keepGoing = false;
+				} //User found
+			} //End iterator
+
+			if (currentCustomer == null){
+				System.out.println("User not found.");
+				keepGoing = false;
+			} //User not found
+
+		} //End while loop
+	} //End loginAsCustomer()
 } //End class def
 
 

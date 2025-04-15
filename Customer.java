@@ -49,43 +49,36 @@ class Customer extends User {
 	} //End menu()
 
 	public void start(){
-		if(this.login()){
-			boolean keepGoing = true;
-			while (keepGoing){
-				String menuInput = this.menu();
-
-				if(menuInput.equals("0")){
-					keepGoing = false;
-				} //Exit
+		boolean keepGoing = true;
+		while (keepGoing){
+			String menuInput = this.menu();
+			if(menuInput.equals("0")){
+				keepGoing = false;
+			} //Exit
 				
-				else if(menuInput.equals("1")){
-					System.out.println("View All Account Balances");
-					this.getReport();
-				} //View All Account
+			else if(menuInput.equals("1")){
+				System.out.println("View All Account Balances");
+				this.getReport();
+			} //View All Account
 				
-				else if(menuInput.equals("2")){
-					System.out.println("Access Checking");
-					this.accessChAccounts();
-				} //Access Checking
+			else if(menuInput.equals("2")){
+				System.out.println("Access Checking");
+				this.accessChAccounts();
+			} //Access Checking
 
-				else if(menuInput.equals("3")){
-					System.out.println("Access Savings");
-					this.accessSvAccounts();
-				} //Access Savings
-				else {
-					System.out.println("Invalid input.");
-				} //Invalid input
-			} //End while
-		} //Login
-
-		else {
-			System.out.println("Invalid login.");
-		} //Invalid login
-
+			else if(menuInput.equals("3")){
+				System.out.println("Access Savings");
+				this.accessSvAccounts();
+			} //Access Savings
+			else {
+				System.out.println("Invalid input.");
+			} //Invalid input
+		} //End while
 	} //End start()	
 
 	@Override
 	public void getReport(){
+		System.out.println("Username: " + this.getUserName());
 		System.out.println("Checking Accounts: ");
 		this.printChAccounts();
 		System.out.println("");
