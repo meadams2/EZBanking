@@ -112,10 +112,12 @@ class Bank implements HasMenu{
 
 			else if(menuResponse.equals("1")){
 				System.out.println("Viewing All Customer Reports");
+				this.fullCustomerReport();
 			} //Full Customer Report
 
 			else if(menuResponse.equals("2")){
 				System.out.println("Access Customer.");
+				this.accessCustomer();
 			} //Access Customer
 
 			else if(menuResponse.equals("3")){
@@ -162,6 +164,32 @@ class Bank implements HasMenu{
 
 		} //End while loop
 	} //End loginAsCustomer()
+
+	public void fullCustomerReport(){
+		Iterator<Customer> it = customers.iterator();
+		while(it.hasNext()){
+			Customer currentCustomer = it.next();
+			currentCustomer.getReport();
+		} //Iterator
+	} //End fullCustomerReport()
+	
+	public void accessCustomer(){
+		java.util.Scanner accountInput = new java.util.Scanner(System.in);
+		Customer currentCustomer = null;
+		
+		System.out.print("Client Username: ");
+		String sUsername = accountInput.nextLine();
+
+		Iterator<Customer> it = customers.iterator();
+		Customer iterCustomer;
+		
+		boolean keepGoing = true;
+		while(keepGoing){
+			while(it.hasNext()){
+				iterCustomer = it.next();
+				if (sUsername ==iterCustomer.getUserName()){
+					currentCustomer = iterCustomer;
+
 } //End class def
 
 
