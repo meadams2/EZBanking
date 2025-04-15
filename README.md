@@ -8,6 +8,25 @@ There are two different users within this program: the administrator and the cus
 - The administrator will have access to login, add customers, manage customer accounts, change their PIN, and apply interest.
 - The customer will have access to login, deposit and/or withdrawal money from their account(s), and change their PIN.
 
+# Testing
+
+When testing the Bank, you will have the option to login as an administrator or as a customer. 
+
+Customer Login
+```
+Username: Alice
+PIN: 0000
+```
+Administrator Login
+```
+Username: Andy
+PIN: 0000
+```
+OR
+```
+Username: Nolan
+PIN: 0000
+```
 # UML
 ![UML Diagram](main/SynergyBankUML.svg)
 
