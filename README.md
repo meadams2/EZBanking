@@ -208,3 +208,12 @@ This project will primarily use Java.
 - Admin functional and tested
 - Bank functional and tested
 - Serialization added
+
+# Additions/Changes to UML
+
+- Added makeAccountID() to CheckingAccount class and SavingsAccount class. 
+- getReport() methods inside classes are void and instead print the report because the only instance they are used within the bank is when printing off the data members in a report style. This method could change as needs arise. 
+- Added printChAccounts to Customer class for ease of getReport()
+- Added printSvAccounts to Customer class for ease of getReport()
+- Added accessCustomerMenu() to Admin class for ease later on. Tells admin what they are able to do to a customer's account. 
+- At this time, admin has to manually apply interest for each customer. Interest is applied to all Savings Accounts for the Customer, but not to all customers. 
