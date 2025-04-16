@@ -33,7 +33,7 @@ class Admin extends User {
 		menuResponse = menuInput.nextLine();
 		return menuResponse;
 	} //End menu()
-
+/*
 	public String accessCustomerMenu(){
 		java.util.Scanner accessInput = new java.util.Scanner(System.in);
 		String accessResponse;
@@ -48,7 +48,7 @@ class Admin extends User {
 		accessResponse = accessInput.nextLine();
 		return accessResponse;
 	} //End accessCustomerMenu()
-
+*/ 
 	public void start(){
 	} //End empty start
 

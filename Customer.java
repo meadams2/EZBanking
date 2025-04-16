@@ -184,6 +184,138 @@ class Customer extends User {
 			} //Account not found
 		} //End while loop
 	} //End accessSavings()
+	
+	public String adminAccessMenu(){
+		java.util.Scanner accessInput = new java.util.Scanner(System.in);
+		String accessResponse;
+
+		System.out.println("0) Exit");
+		System.out.println("1) Print Full Account List");
+		System.out.println("2) Apply Interest");
+		System.out.println("3) Add Account");
+		System.out.println("4) Delete Account");
+		System.out.print("Action: ");
+
+		accessResponse = accessInput.nextLine();
+		return accessResponse;
+	} //End adminAccessMenu()
+
+	public void adminAccess(){
+		String accessResponse = this.adminAccessMenu();
+
+		boolean keepGoing = true;
+		while(keepGoing){
+			if(accessResponse.equals("0")){
+				System.out.println("Exiting to Admin Menu.");
+				keepGoing = false;
+			} //Quit
+
+			else if(accessResponse.equals("1")){
+				this.getReport();
+			} //Full Account List
+			
+			else if(accessResponse.equals("2")){
+				this.applyInterest();
+			} //Add interest
+
+			else if(accessResponse.equals("3")){
+				this.addAccount();
+			} //Add account
+
+			else if(accessResponse.equals("4")){
+				this.delAccount();
+			} //Del account
+			
+			else {
+				System.out.println("Invalid input.");
+			} //Invalid
+		} //End while loop
+	} //End adminAccess
+
+
+	public void applyInterest(){
+		Iterator<SavingsAccount> it = svAccounts.iterator();
+		while(it.hasNext()){
+			SavingsAccount currentAccount = it.next();
+			currentAccount.calcInterest();
+			System.out.println("New Balance: " + currentAccount.getBalanceString());
+		} //End while
+	} //End applyInterest()
+
+	public void addAccount(){
+		java.util.Scanner accountInput = new java.util.Scanner(System.in);
+		String accountType;
+
+		System.out.println("0) Checking");
+		System.out.println("1) Savings");
+		System.out.print("Account (0-1): ");
+		
+		accountType = accountInput.nextLine();
+
+		if(accountType.equals("0")){
+			chAccounts.add(new CheckingAccount(1000d));
+			System.out.println("Account added.");
+		} //Checking
+
+		else if(accountType.equals("1")){
+			svAccounts.add(new SavingsAccount(1000d, 5));
+		} //Savings
+
+		else{
+			System.out.println("Invalid account type.");
+		} //Invalid
+	} //End addAccount()
+	
+	public void delAccount(){
+		java.util.Scanner delInput = new java.util.Scanner(System.in);
+		String accountType;
+
+		System.out.println("0) Checking");
+		System.out.println("1) Savings");
+		System.out.print("Action: ");
+
+		accountType = delInput.nextLine();
+		if(accountType.equals("0")){
+			this.printChAccounts();
+			
+			System.out.println("Account Number: ");
+			String accountNumber = delInput.nextLine();
+			int accountID = 0;
+			
+			try {
+				accountID = Integer.parseInt(accountNumber);
+			} catch (NumberFormatException e){
+				e.printStackTrace();
+			} //Exception handling
+
+			Iterator<CheckingAccount> it = chAccounts.iterator();
+			CheckingAccount iterChecking;
+			CheckingAccount currentAccount = null;
+		
+			boolean keepGoing = true;
+			while(keepGoing){
+				while (it.hasNext()){
+				iterChecking = it.next();
+				if(accountID == iterChecking.getAccountID()){
+					currentAccount = iterChecking;
+					chAccounts.remove(currentAccount);
+					keepGoing = false;
+				} //Remove checking
+				
+				} //Iterator
+
+				if(currentAccount == null){
+					System.out.println("Account does not exist.");
+					keepGoing = false;
+				} //Account not found
+			} //End while
+		} //End checking del
+
+		if (accountType.equals("1")){
+			this.printSvAccounts();
+				
+
+
 
 
 } //End class def
