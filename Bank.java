@@ -182,14 +182,24 @@ class Bank implements HasMenu{
 
 		Iterator<Customer> it = customers.iterator();
 		Customer iterCustomer;
-		
+
 		boolean keepGoing = true;
 		while(keepGoing){
 			while(it.hasNext()){
 				iterCustomer = it.next();
-				if (sUsername ==iterCustomer.getUserName()){
+				if (sUsername.equals(iterCustomer.getUserName())){
 					currentCustomer = iterCustomer;
+					currentCustomer.adminAccess();
+					keepGoing = false;
+				} //User found
+			} //End iterator
 
+			if(currentCustomer == null){
+				System.out.println("User not found.");
+				keepGoing = false;
+			} //User not found
+		} //End while loop
+	} //End accessCustomer()
 } //End class def
 
 

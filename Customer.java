@@ -280,7 +280,9 @@ class Customer extends User {
 		} //End delete checking
 
 		if (accountType.equals("1")){
-	}
+			this.delSaving();
+		} //End delete saving
+	} //End delAccount()
 	
 	public void delChecking(){
 		java.util.Scanner accountInput = new java.util.Scanner(System.in);
@@ -289,7 +291,7 @@ class Customer extends User {
 		this.printChAccounts();
 		
 		System.out.print("Account Number: ");
-		String sAccountID = accountInput.nextLine();
+		sAccountID = accountInput.nextLine();
 		int accountID = 0;
 
 		try {
@@ -320,8 +322,43 @@ class Customer extends User {
 			} //Account not found
 		} //End while
 	} //End delChecking()
+	
+	public void delSaving(){
+		java.util.Scanner accountInput = new java.util.Scanner(System.in);
+		String sAccountID;
 
+		this.printSvAccounts();
+		System.out.print("Account Number: ");
+		sAccountID = accountInput.nextLine();
+		int accountID = 0;
 
+		try {
+			accountID = Integer.parseInt(sAccountID);
+		}  catch (NumberFormatException e){
+			e.printStackTrace();
+		} //Exception handling
 
+		Iterator<SavingsAccount> it = svAccounts.iterator();
+		SavingsAccount iterSaving;
+		SavingsAccount currentAccount = null;
+
+		boolean keepGoing = true;
+		while(keepGoing){
+			while(it.hasNext()){
+				iterSaving = it.next();
+				if(accountID == iterSaving.getAccountID()){
+					currentAccount = iterSaving;
+					svAccounts.remove(currentAccount);
+					this.printSvAccounts();
+					keepGoing = false;
+				} //Remove Saving
+			} //Iterator
+
+			if(currentAccount == null){
+				System.out.println("Account does not exist.");
+				keepGoing = false;
+			} //Account not found
+		} //End while
+	} //End delSaving()
 
 } //End class def
