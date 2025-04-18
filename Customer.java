@@ -100,6 +100,11 @@ class Customer extends User {
 	} //loadSampleSvAccount()
 
 	public void printChAccounts(){
+		for(CheckingAccount currentAccount : chAccounts){
+			currentAccount.getAccountReport();
+		} //End for loop
+
+		/*
 		Iterator<CheckingAccount> it = chAccounts.iterator();
 		CheckingAccount currentAccount = null;
 		boolean keepGoing = true;
@@ -113,9 +118,14 @@ class Customer extends User {
 				keepGoing = false;
 			} //Patch?
 		} //End while
+		*/
 	} //printChAccounts()
 
 	public void printSvAccounts(){
+		for(SavingsAccount currentAccount: svAccounts){
+			currentAccount.getAccountReport();
+		} //End for
+		/*
 		Iterator<SavingsAccount> it = svAccounts.iterator();
 		SavingsAccount currentAccount = null;
 		boolean keepGoing = true;
@@ -129,13 +139,14 @@ class Customer extends User {
 				keepGoing = false;
 			} //Patch?
 		} //End while
+		*/
 	} //printSvAccounts()
 	
 	public void accessChAccounts(){
 		this.printChAccounts();
 
 		java.util.Scanner checkingInput = new java.util.Scanner(System.in);
-		CheckingAccount currentAccount = null;
+	//	CheckingAccount currentAccount = null;
 		
 		System.out.print("Account Number: ");
 		String sAccount = checkingInput.nextLine();
@@ -146,7 +157,14 @@ class Customer extends User {
 			e.printStackTrace();
 			//Lets program die gracefully if user inputs a nonnumeric
 		} 
+		
+		for(CheckingAccount currentAccount: chAccounts){
+			if(accountID == currentAccount.getAccountID()){
+				currentAccount.start();
+			} 
+		} //End for
 
+		/*
 		Iterator<CheckingAccount> it = chAccounts.iterator();
 		CheckingAccount iterChecking;
 		boolean keepGoing = true;
@@ -164,13 +182,14 @@ class Customer extends User {
 				keepGoing = false;
 			} //Account not found
 		} //End while loop
+		*/
 	} ///End accessChecking()
 
 	public void accessSvAccounts(){
 		this.printSvAccounts();
 
 		java.util.Scanner savingInput = new java.util.Scanner(System.in);
-		SavingsAccount currentAccount = null;
+	//	SavingsAccount currentAccount = null;
 
 		System.out.print("Account Number: ");
 		String sAccount = savingInput.nextLine();
@@ -181,7 +200,14 @@ class Customer extends User {
 		} catch (NumberFormatException e){
 			e.printStackTrace();
 		} //End exception handling 
+		
+		for(SavingsAccount currentAccount: svAccounts){
+			if (accountID == currentAccount.getAccountID()){
+				currentAccount.start();
+			} 
+		} //End for
 
+		/*
 		Iterator<SavingsAccount> it = svAccounts.iterator();
 		SavingsAccount iterSavings;
 		boolean keepGoing = true;
@@ -201,6 +227,7 @@ class Customer extends User {
 				keepGoing = false;
 			} //Account not found
 		} //End while loop
+		*/
 	} //End accessSavings()
 	
 	public String adminAccessMenu(){
@@ -252,6 +279,12 @@ class Customer extends User {
 
 
 	public void applyInterest(){
+		for(SavingsAccount currentAccount: svAccounts){
+			currentAccount.calcInterest();
+			System.out.println("New Balance: " + currentAccount.getBalanceString());
+		} //End for
+
+		/*
 		Iterator<SavingsAccount> it = svAccounts.iterator();
 		SavingsAccount currentAccount = null;
 		boolean keepGoing = true;
@@ -267,6 +300,7 @@ class Customer extends User {
 				keepGoing = false;
 			} //Patch?
 		} //End while
+		*/
 	} //End applyInterest()
 
 	public void addAccount(){
@@ -326,7 +360,15 @@ class Customer extends User {
 		} catch (NumberFormatException e){
 			e.printStackTrace();
 		} //Exception handling
+		
+		for(CheckingAccount currentAccount: chAccounts){
+			if(accountID == currentAccount.getAccountID()){
+				chAccounts.remove(currentAccount);
+				this.printChAccounts();
+			}
+		} //End for 
 
+		/*
 		Iterator<CheckingAccount> it = chAccounts.iterator();
 		CheckingAccount iterChecking;
 		CheckingAccount currentAccount = null;
@@ -348,6 +390,7 @@ class Customer extends User {
 				keepGoing = false;
 			} //Account not found
 		} //End while
+		*/
 	} //End delChecking()
 	
 	public void delSaving(){
@@ -364,7 +407,14 @@ class Customer extends User {
 		}  catch (NumberFormatException e){
 			e.printStackTrace();
 		} //Exception handling
+		
+		for(SavingsAccount currentAccount : svAccounts){
+			if(accountID == currentAccount.getAccountID()){
+				svAccounts.remove(currentAccount);
+			} 
+		} //End for
 
+		/*
 		Iterator<SavingsAccount> it = svAccounts.iterator();
 		SavingsAccount iterSaving;
 		SavingsAccount currentAccount = null;
@@ -386,6 +436,7 @@ class Customer extends User {
 				keepGoing = false;
 			} //Account not found
 		} //End while
+		*/
 	} //End delSaving()
 
 } //End class def
