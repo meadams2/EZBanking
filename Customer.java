@@ -87,6 +87,7 @@ class Customer extends User {
 
 		System.out.println("Savings Accounts: ");
 		this.printSvAccounts();	
+		System.out.println("===================");
 	}
 
 	public void loadSampleChAccount(){
