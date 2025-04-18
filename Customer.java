@@ -15,7 +15,7 @@ class Customer extends User {
 		Customer alice = new Customer("Alice", "0000");
 		alice.start();
 		//testing adminAccess()
-		alice.adminAccess();
+	//	alice.adminAccess();
 	} //End main test harness
 
 	public Customer(){

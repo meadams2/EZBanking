@@ -122,6 +122,7 @@ class Bank implements HasMenu{
 
 			else if(menuResponse.equals("3")){
 				System.out.println("Add Customer.");
+				this.addCustomer();
 			} //Add customer
 
 			else if(menuResponse.equals("4")){
@@ -200,6 +201,20 @@ class Bank implements HasMenu{
 			} //User not found
 		} //End while loop
 	} //End accessCustomer()
+
+	public void addCustomer(){
+		java.util.Scanner addInput = new java.util.Scanner(System.in);
+		String username;
+		String sPIN;
+		
+		System.out.print("Username: ");
+		username = addInput.nextLine();
+
+		System.out.print("PIN: ");
+		sPIN = addInput.nextLine();
+
+		customers.add(new Customer(username, sPIN));
+	} //End addCustomer()
 } //End class def
 
 
