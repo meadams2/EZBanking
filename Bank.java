@@ -126,7 +126,8 @@ class Bank implements HasMenu{
 			} //Add customer
 
 			else if(menuResponse.equals("4")){
-				System.out.println("Delete Cusotmer.");
+				System.out.println("Delete Customer.");
+				this.delCustomer();
 			} //Delete customer
 
 			else {
@@ -215,6 +216,37 @@ class Bank implements HasMenu{
 
 		customers.add(new Customer(username, sPIN));
 	} //End addCustomer()
+
+	public void delCustomer(){
+		java.util.Scanner customerInput = new java.util.Scanner(System.in);
+		String sUsername; 
+
+		this.fullCustomerReport();
+
+		System.out.print("Username: ");
+		sUsername = customerInput.nextLine(); 
+		
+		Iterator<Customer> it = customers.iterator();
+		Customer currentCustomer = null;
+
+		boolean keepGoing = true;
+		while(keepGoing){
+			while(it.hasNext()){
+				currentCustomer = it.next();
+				if(sUsername.equals(currentCustomer.getUserName())){
+					System.out.println("Removing " + currentCustomer.getUserName());
+					it.remove();
+					keepGoing = false;
+				} //Remove customer
+			} //Iterator
+			
+			if(currentCustomer == null){
+				System.out.println("Customer not found.");
+				keepGoing = false;
+			}
+		} //End while
+	} //End delCustomer()
+				
 } //End class def
 
 
