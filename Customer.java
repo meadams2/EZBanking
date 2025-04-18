@@ -101,17 +101,33 @@ class Customer extends User {
 
 	public void printChAccounts(){
 		Iterator<CheckingAccount> it = chAccounts.iterator();
-		while(it.hasNext()){
-			CheckingAccount currentAccount = it.next();
-			currentAccount.getAccountReport();
+		CheckingAccount currentAccount = null;
+		boolean keepGoing = true;
+		while(keepGoing){
+			while(it.hasNext()){
+				currentAccount = it.next();
+				currentAccount.getAccountReport();
+			} //Iterator
+
+			if(currentAccount == null){
+				keepGoing = false;
+			} //Patch?
 		} //End while
 	} //printChAccounts()
 
 	public void printSvAccounts(){
 		Iterator<SavingsAccount> it = svAccounts.iterator();
-		while(it.hasNext()){
-			SavingsAccount currentAccount = it.next();
-			currentAccount.getAccountReport();
+		SavingsAccount currentAccount = null;
+		boolean keepGoing = true;
+		while(keepGoing){
+			while(it.hasNext()){
+				currentAccount = it.next();
+				currentAccount.getAccountReport();
+			} //Iterator
+
+			if(currentAccount == null){
+				keepGoing = false;
+			} //Patch?
 		} //End while
 	} //printSvAccounts()
 	
@@ -237,10 +253,19 @@ class Customer extends User {
 
 	public void applyInterest(){
 		Iterator<SavingsAccount> it = svAccounts.iterator();
-		while(it.hasNext()){
-			SavingsAccount currentAccount = it.next();
-			currentAccount.calcInterest();
-			System.out.println("New Balance: " + currentAccount.getBalanceString());
+		SavingsAccount currentAccount = null;
+		boolean keepGoing = true;
+		
+		while(keepGoing){
+			while(it.hasNext()){
+				currentAccount = it.next();
+				currentAccount.calcInterest();
+				System.out.println("New Balance: " + currentAccount.getBalanceString());
+			} //Iterator
+
+			if(currentAccount == null){
+				keepGoing = false;
+			} //Patch?
 		} //End while
 	} //End applyInterest()
 
