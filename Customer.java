@@ -276,44 +276,50 @@ class Customer extends User {
 
 		accountType = delInput.nextLine();
 		if(accountType.equals("0")){
-			this.printChAccounts();
-			
-			System.out.println("Account Number: ");
-			String accountNumber = delInput.nextLine();
-			int accountID = 0;
-			
-			try {
-				accountID = Integer.parseInt(accountNumber);
-			} catch (NumberFormatException e){
-				e.printStackTrace();
-			} //Exception handling
+			this.delChecking();
+		} //End delete checking
 
-			Iterator<CheckingAccount> it = chAccounts.iterator();
-			CheckingAccount iterChecking;
-			CheckingAccount currentAccount = null;
+		if (accountType.equals("1")){
+	}
+	
+	public void delChecking(){
+		java.util.Scanner accountInput = new java.util.Scanner(System.in);
+		String sAccountID;
+
+		this.printChAccounts();
 		
-			boolean keepGoing = true;
-			while(keepGoing){
-				while (it.hasNext()){
+		System.out.print("Account Number: ");
+		String sAccountID = accountInput.nextLine();
+		int accountID = 0;
+
+		try {
+			accountID = Integer.parseInt(sAccountID);
+		} catch (NumberFormatException e){
+			e.printStackTrace();
+		} //Exception handling
+
+		Iterator<CheckingAccount> it = chAccounts.iterator();
+		CheckingAccount iterChecking;
+		CheckingAccount currentAccount = null;
+
+		boolean keepGoing = true;
+		while(keepGoing){
+			while(it.hasNext()){
 				iterChecking = it.next();
 				if(accountID == iterChecking.getAccountID()){
 					currentAccount = iterChecking;
 					chAccounts.remove(currentAccount);
-					keepGoing = false;
+					this.printChAccounts();
+					keepGoing = false; 
 				} //Remove checking
-				
-				} //Iterator
-
-				if(currentAccount == null){
-					System.out.println("Account does not exist.");
-					keepGoing = false;
-				} //Account not found
-			} //End while
-		} //End checking del
-
-		if (accountType.equals("1")){
-			this.printSvAccounts();
-				
+			} //Iterator
+			
+			if(currentAccount == null){
+				System.out.println("Account does not exist.");
+				keepGoing = false;
+			} //Account not found
+		} //End while
+	} //End delChecking()
 
 
 
