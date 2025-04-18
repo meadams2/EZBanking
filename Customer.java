@@ -246,10 +246,9 @@ class Customer extends User {
 	} //End adminAccessMenu()
 
 	public void adminAccess(){
-		String accessResponse = this.adminAccessMenu();
-
 		boolean keepGoing = true;
 		while(keepGoing){
+			String accessResponse = this.adminAccessMenu();
 			if(accessResponse.equals("0")){
 				System.out.println("Exiting to Admin Menu.");
 				keepGoing = false;
