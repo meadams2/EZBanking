@@ -360,25 +360,16 @@ class Customer extends User {
 			e.printStackTrace();
 		} //Exception handling
 		
-		for(CheckingAccount currentAccount: chAccounts){
-			if(accountID == currentAccount.getAccountID()){
-				chAccounts.remove(currentAccount);
-				this.printChAccounts();
-			}
-		} //End for 
-
-		/*
 		Iterator<CheckingAccount> it = chAccounts.iterator();
-		CheckingAccount iterChecking;
+	//	CheckingAccount iterChecking;
 		CheckingAccount currentAccount = null;
 
 		boolean keepGoing = true;
 		while(keepGoing){
 			while(it.hasNext()){
-				iterChecking = it.next();
-				if(accountID == iterChecking.getAccountID()){
-					currentAccount = iterChecking;
-					chAccounts.remove(currentAccount);
+				currentAccount = it.next();
+				if(accountID == currentAccount.getAccountID()){
+					it.remove();
 					this.printChAccounts();
 					keepGoing = false; 
 				} //Remove checking
@@ -389,7 +380,7 @@ class Customer extends User {
 				keepGoing = false;
 			} //Account not found
 		} //End while
-		*/
+		
 	} //End delChecking()
 	
 	public void delSaving(){
@@ -407,24 +398,16 @@ class Customer extends User {
 			e.printStackTrace();
 		} //Exception handling
 		
-		for(SavingsAccount currentAccount : svAccounts){
-			if(accountID == currentAccount.getAccountID()){
-				svAccounts.remove(currentAccount);
-			} 
-		} //End for
-
-		/*
 		Iterator<SavingsAccount> it = svAccounts.iterator();
-		SavingsAccount iterSaving;
+	//	SavingsAccount iterSaving;
 		SavingsAccount currentAccount = null;
 
 		boolean keepGoing = true;
 		while(keepGoing){
 			while(it.hasNext()){
-				iterSaving = it.next();
-				if(accountID == iterSaving.getAccountID()){
-					currentAccount = iterSaving;
-					svAccounts.remove(currentAccount);
+				currentAccount = it.next();
+				if(accountID == currentAccount.getAccountID()){
+					it.remove();
 					this.printSvAccounts();
 					keepGoing = false;
 				} //Remove Saving
@@ -435,7 +418,6 @@ class Customer extends User {
 				keepGoing = false;
 			} //Account not found
 		} //End while
-		*/
 	} //End delSaving()
 
 } //End class def
