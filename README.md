@@ -5,7 +5,7 @@ The goal of this project is to create a banking software with two separate user 
 # Use Case
 
 There are two different users within this program: the administrator and the customer. 
-- The administrator will have access to login, add customers, manage customer accounts, change their PIN, and apply interest.
+- The administrator will have access to login, add customers, manage customer accounts, and apply interest. At this point, administrators can't change their PIN (for ease of testing and my sanity). Will possibly implement changePIN() in admin class in the future. 
 - The customer will have access to login, deposit and/or withdrawal money from their account(s), and change their PIN.
 
 # Testing
