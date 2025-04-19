@@ -17,14 +17,18 @@ class Bank implements HasMenu, Serializable{
 
 	public Bank(){
 		//Initialization
-		this.loadSampleCustomers();
-//		this.loadCustomers();
-		this.saveCustomers();
 		this.loadCustomers();
-		this.loadSampleAdmin();
-//		this.loadAdmin();
-		this.saveAdmin();
+		if (customers.isEmpty()){
+			this.loadSampleCustomers();
+			this.saveCustomers();
+		} 
+
 		this.loadAdmin();
+		if(admins.isEmpty()){
+			this.loadSampleAdmin();
+			this.saveAdmin();
+		} 
+
 		//Persistence
 		this.start();
 		this.saveCustomers();
