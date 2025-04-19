@@ -1,11 +1,12 @@
 //CheckingAccount.java
 
 import java.util.*;
+import java.io.*;
 
-class CheckingAccount implements HasMenu{
+class CheckingAccount implements HasMenu, Serializable{
+	private static final long serialVersionUID = 1L;
+
 	private double balance;
-//	private Random rnd = new Random();
-//	Initially considered doing account numbers with Randomization...that has issues
 	int accountID;
 
 	public static void main(String[] args){

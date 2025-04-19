@@ -1,8 +1,10 @@
 //Bank.java
 
 import java.util.*;
+import java.io.*;
 
-class Bank implements HasMenu{
+class Bank implements HasMenu, Serializable{
+	private static final long serialVersionUID = 1L;
 	class AdminList extends ArrayList<Admin>{};
 	class CustomerList extends ArrayList<Customer>{};
 
@@ -14,9 +16,17 @@ class Bank implements HasMenu{
 	} //End main()
 
 	public Bank(){
-		this.loadSampleCustomers();
-		this.loadSampleAdmin();
+		//Initialization
+//		this.loadSampleCustomers();
+		this.saveCustomers();
+		this.loadCustomers();
+//		this.loadSampleAdmin();
+		this.saveAdmin();
+		this.loadAdmin();
+		//Persistence
 		this.start();
+		this.saveCustomers();
+		this.saveAdmin();
 	} //End constructor
 	
 	public void loadSampleCustomers(){
@@ -25,10 +35,59 @@ class Bank implements HasMenu{
 		customers.add(new Customer("Cindy", "0000"));
 	} //End loadSampleCustomers()
 
+	public void loadCustomers(){
+		try{
+			FileInputStream fIn = new FileInputStream("customerArray.dat");
+			ObjectInputStream obIn = new ObjectInputStream(fIn);
+			customers = (CustomerList)obIn.readObject();
+			obIn.close();
+			fIn.close();
+		} catch (Exception e){
+			System.out.println(e.getMessage());
+		} //Exception handling
+	} //End loadCustomers()
+
+	public void saveCustomers(){
+		try{
+			FileOutputStream fo = new FileOutputStream("customerArray.dat");
+			ObjectOutputStream obOut = new ObjectOutputStream(fo);
+			obOut.writeObject(customers);
+			obOut.close();
+			fo.close();
+		} catch (Exception e){
+			System.out.println(e.getMessage());
+		} //Exception handling
+	} //End saveCustomers()
+
 	public void loadSampleAdmin(){
 		admins.add(new Admin("Andy", "0000"));
 		admins.add(new Admin("Nolan", "0000"));
+		admins.add(new Admin("Admin", "0000"));
 	} //End loadSampleAdmin()
+	
+	public void loadAdmin(){
+		try{
+			FileInputStream fIn = new FileInputStream("adminArray.dat");
+			ObjectInputStream obIn = new ObjectInputStream(fIn);
+			admins = (AdminList)obIn.readObject();
+			obIn.close();
+			fIn.close();
+		} catch (Exception e){
+			System.out.println(e.getMessage());
+		} //Exception handling
+	} //End loadAdmin()
+
+	public void saveAdmin(){
+		try{
+			FileOutputStream fo = new FileOutputStream("adminArray.dat");
+			ObjectOutputStream obOut = new ObjectOutputStream(fo);
+			obOut.writeObject(admins);
+			obOut.close();
+			fo.close();
+		} catch(Exception e){
+			System.out.println(e.getMessage());
+		} //Exception handling
+	} //End saveAdmin()
 
 	public String menu(){
 		java.util.Scanner menuInput = new java.util.Scanner(System.in);

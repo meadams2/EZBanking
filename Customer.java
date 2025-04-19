@@ -1,8 +1,11 @@
 //Customer.java
 
 import java.util.*;
+import java.io.*;
 
 class Customer extends User {
+	private static final long serialVersionUID = 1L;
+
 	class CheckingAcctList extends ArrayList<CheckingAccount>{};
 	class SavingsAcctList extends ArrayList<SavingsAccount>{};
 	protected CheckingAcctList chAccounts = new CheckingAcctList();
@@ -43,7 +46,8 @@ class Customer extends User {
 		System.out.println("1) View All Account Balances");
 		System.out.println("2) Access Checking");
 		System.out.println("3) Access Savings");
-		System.out.print("Action (0-3): ");
+		System.out.println("4) Change PIN");
+		System.out.print("Action (0-4): ");
 
 		menuResponse = menuInput.nextLine();
 
@@ -72,6 +76,12 @@ class Customer extends User {
 				System.out.println("Access Savings");
 				this.accessSvAccounts();
 			} //Access Savings
+
+			else if(menuInput.equals("4")){
+				System.out.println("Change PIN.");
+				this.changePIN();
+			} //Change PIN
+
 			else {
 				System.out.println("Invalid input.");
 			} //Invalid input
@@ -104,50 +114,18 @@ class Customer extends User {
 		for(CheckingAccount currentAccount : chAccounts){
 			currentAccount.getAccountReport();
 		} //End for loop
-
-		/*
-		Iterator<CheckingAccount> it = chAccounts.iterator();
-		CheckingAccount currentAccount = null;
-		boolean keepGoing = true;
-		while(keepGoing){
-			while(it.hasNext()){
-				currentAccount = it.next();
-				currentAccount.getAccountReport();
-			} //Iterator
-
-			if(currentAccount == null){
-				keepGoing = false;
-			} //Patch?
-		} //End while
-		*/
 	} //printChAccounts()
 
 	public void printSvAccounts(){
 		for(SavingsAccount currentAccount: svAccounts){
 			currentAccount.getAccountReport();
 		} //End for
-		/*
-		Iterator<SavingsAccount> it = svAccounts.iterator();
-		SavingsAccount currentAccount = null;
-		boolean keepGoing = true;
-		while(keepGoing){
-			while(it.hasNext()){
-				currentAccount = it.next();
-				currentAccount.getAccountReport();
-			} //Iterator
-
-			if(currentAccount == null){
-				keepGoing = false;
-			} //Patch?
-		} //End while
-		*/
 	} //printSvAccounts()
 	
 	public void accessChAccounts(){
 		this.printChAccounts();
 
 		java.util.Scanner checkingInput = new java.util.Scanner(System.in);
-	//	CheckingAccount currentAccount = null;
 		
 		System.out.print("Account Number: ");
 		String sAccount = checkingInput.nextLine();
@@ -164,26 +142,6 @@ class Customer extends User {
 				currentAccount.start();
 			} 
 		} //End for
-
-		/*
-		Iterator<CheckingAccount> it = chAccounts.iterator();
-		CheckingAccount iterChecking;
-		boolean keepGoing = true;
-		while (keepGoing){
-			while(it.hasNext()){
-				iterChecking = it.next();
-				if (accountID == iterChecking.getAccountID()){
-					currentAccount = iterChecking;
-					currentAccount.start();
-					keepGoing = false;
-				} //Account found
-			} //End iterator
-			if (currentAccount == null){
-				System.out.println("Account not found.");
-				keepGoing = false;
-			} //Account not found
-		} //End while loop
-		*/
 	} ///End accessChecking()
 
 	public void accessSvAccounts(){
@@ -207,29 +165,16 @@ class Customer extends User {
 				currentAccount.start();
 			} 
 		} //End for
-
-		/*
-		Iterator<SavingsAccount> it = svAccounts.iterator();
-		SavingsAccount iterSavings;
-		boolean keepGoing = true;
-
-		while(keepGoing){
-			while(it.hasNext()){
-				iterSavings = it.next();
-				if(accountID == iterSavings.getAccountID()){
-					currentAccount = iterSavings;
-					currentAccount.start();
-					keepGoing = false;
-				} //Account found
-			} //End iterator
-
-			if(currentAccount == null){
-				System.out.println("Account not found.");
-				keepGoing = false;
-			} //Account not found
-		} //End while loop
-		*/
 	} //End accessSavings()
+
+	public void changePIN(){
+		java.util.Scanner PINinput = new java.util.Scanner(System.in);
+		String pinResponse;
+		System.out.println("New PIN: ");
+		pinResponse = PINinput.nextLine();
+		setPIN(pinResponse);
+		System.out.println("PIN Changed!");
+	} //End changePIN()
 	
 	public String adminAccessMenu(){
 		java.util.Scanner accessInput = new java.util.Scanner(System.in);
@@ -283,24 +228,6 @@ class Customer extends User {
 			currentAccount.calcInterest();
 			System.out.println("New Balance: " + currentAccount.getBalanceString());
 		} //End for
-
-		/*
-		Iterator<SavingsAccount> it = svAccounts.iterator();
-		SavingsAccount currentAccount = null;
-		boolean keepGoing = true;
-		
-		while(keepGoing){
-			while(it.hasNext()){
-				currentAccount = it.next();
-				currentAccount.calcInterest();
-				System.out.println("New Balance: " + currentAccount.getBalanceString());
-			} //Iterator
-
-			if(currentAccount == null){
-				keepGoing = false;
-			} //Patch?
-		} //End while
-		*/
 	} //End applyInterest()
 
 	public void addAccount(){

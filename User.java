@@ -1,8 +1,11 @@
 //User.java
 
 import java.util.*;
+import java.io.*;
 
-public abstract class User implements HasMenu{
+public abstract class User implements HasMenu, Serializable{
+	private static final long serialVersionUID = 1L;
+
 	protected String userName = ""; 
        	protected String PIN = "";
 	

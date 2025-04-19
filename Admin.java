@@ -1,8 +1,11 @@
 //Admin.java
 
 import java.util.*;
+import java.io.*;
 
-class Admin extends User {
+class Admin extends User{
+	private static final long serialVersionUID = 1L;
+
 	public static void main(String[] args){
 		Admin admin = new Admin();
 		admin.menu();
@@ -33,22 +36,7 @@ class Admin extends User {
 		menuResponse = menuInput.nextLine();
 		return menuResponse;
 	} //End menu()
-/*
-	public String accessCustomerMenu(){
-		java.util.Scanner accessInput = new java.util.Scanner(System.in);
-		String accessResponse;
-
-		System.out.println("0) Exit");
-		System.out.println("1) Print Full Account List");
-		System.out.println("2) Apply interest");
-		System.out.println("3) Add Account");
-		System.out.println("4) Delete Account");
-		System.out.print("Action: ");
-
-		accessResponse = accessInput.nextLine();
-		return accessResponse;
-	} //End accessCustomerMenu()
-*/ 
+ 
 	public void start(){
 	} //End empty start
 
