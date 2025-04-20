@@ -5,7 +5,7 @@ The goal of this project is to create a banking software with two separate user 
 # Use Case
 
 There are two different users within this program: the administrator and the customer. 
-- The administrator will have access to login, add customers, manage customer accounts, change their PIN, and apply interest.
+- The administrator will have access to login, add customers, manage customer accounts, and apply interest. At this point, administrators can't change their PIN (for ease of testing and my sanity). Will possibly implement changePIN() in admin class in the future. 
 - The customer will have access to login, deposit and/or withdrawal money from their account(s), and change their PIN.
 
 # Testing
@@ -234,5 +234,8 @@ This project will primarily use Java.
 - getReport() methods inside classes are void and instead print the report because the only instance they are used within the bank is when printing off the data members in a report style. This method could change as needs arise. 
 - Added printChAccounts to Customer class for ease of getReport()
 - Added printSvAccounts to Customer class for ease of getReport()
-- Added accessCustomerMenu() to Admin class for ease later on. Tells admin what they are able to do to a customer's account. 
-- At this time, admin has to manually apply interest for each customer. Interest is applied to all Savings Accounts for the Customer, but not to all customers. 
+- Added accessCustomer() to Bank class. Has admin enter a username--if username is a Customer username, calls adminAccess() within Customer class.
+- adminAccess() calls adminAccessMenu() and directs traffic accordingly. 
+- At this time, admin has to manually apply interest for each customer. Interest is applied to all Savings Accounts for the Customer, but not to all customers.
+- Bank constructor--added condition to make loadSampleCustomers() and loadSampleAdmin() only run when customers.dat and admins.dat is empty.
+- Added changePIN() in Customer class.
