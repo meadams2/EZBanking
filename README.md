@@ -1,4 +1,4 @@
-# SynergyBank - A Banking Software
+# EZBanking - A Banking Software
 
 The goal of this project is to create a banking software with two separate user interfaces for the administrator and the customer. As with any bank, there are multiple administrators and multiple customers. 
 
