@@ -12,7 +12,7 @@ class Bank implements HasMenu, Serializable{
 	protected CustomerList customers = new CustomerList();
 
 	public static void main(String[] args){
-		Bank synergyBank = new Bank();
+		Bank ezBank = new Bank();
 	} //End main()
 
 	public Bank(){
